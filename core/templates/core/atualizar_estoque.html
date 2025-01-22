@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Atualizar Estoque{% endblock %}
+{% block content %}
+<div class="container">
+    <h1 class="mb-4">Atualizar Estoque</h1>
+    <form method="POST" class="row g-3">
+        {% csrf_token %}
+        <div class="col-md-6">
+            <label for="quantidade" class="form-label">Nova Quantidade:</label>
+            <input type="number" id="quantidade" name="quantidade" class="form-control" required>
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Salvar</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block title %}Cadastrar Pedido{% endblock %}
+{% block content %}
+<h1 class="mb-4">Cadastrar Pedido</h1>
+<div class="alert alert-warning">
+    Atenção: Estoque disponível atual é de <strong>{{ estoque_atual }}</strong> unidades.
+</div>
+<form method="POST" class="row g-3">
+    {% csrf_token %}
+    <div class="col-md-6">
+        <label for="nome_cliente" class="form-label">Nome do Cliente:</label>
+        <input type="text" id="nome_cliente" name="nome_cliente" class="form-control" required>
+    </div>
+    <div class="col-md-6">
+        <label for="telefone" class="form-label">Telefone:</label>
+        <input type="text" id="telefone" name="telefone" class="form-control" required>
+    </div>
+    <div class="col-12">
+        <label for="endereco" class="form-label">Endereço:</label>
+        <textarea id="endereco" name="endereco" class="form-control" rows="3" required></textarea>
+    </div>
+    <div class="col-md-6">
+        <label for="tipo" class="form-label">Tipo:</label>
+        <input type="text" id="tipo" name="tipo" class="form-control" required>
+    </div>
+    <div class="col-md-2">
+        <label for="quantidade" class="form-label">Quantidade:</label>
+        <input type="number" id="quantidade" name="quantidade" class="form-control" step="1" min="1" required>
+    </div>
+    <div class="col-md-2">
+        <label for="largura" class="form-label">Largura (cm):</label>
+        <input type="number" id="largura" name="largura" class="form-control" step="0.01" required>
+    </div>
+    <div class="col-md-2">
+        <label for="espessura" class="form-label">Espessura (cm):</label>
+        <input type="number" id="espessura" name="espessura" class="form-control" step="0.01" required>
+    </div>
+    <div class="col-md-2">
+        <label for="comprimento" class="form-label">Comprimento (cm):</label>
+        <input type="number" id="comprimento" name="comprimento" class="form-control" step="0.01" required>
+    </div>
+    <div class="col-md-4">
+        <label for="valor_unitario" class="form-label">Valor Unitário:</label>
+        <input type="number" id="valor_unitario" name="valor_unitario" class="form-control" step="0.01" required>
+    </div>
+    <div class="col-12">
+        <label for="observacao" class="form-label">Observação:</label>
+        <textarea id="observacao" name="observacao" class="form-control" rows="3"></textarea>
+    </div>
+    <div class="col-md-6">
+        <label for="data_pedido" class="form-label">Data do Pedido:</label>
+        <input type="date" id="data_pedido" name="data_pedido" class="form-control" required>
+    </div>
+    <div class="col-md-6">
+        <label for="data_entrega" class="form-label">Data de Entrega:</label>
+        <input type="date" id="data_entrega" name="data_entrega" class="form-control" required>
+    </div>
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary">Salvar</button>
+    </div>    
+</form>
+{% endblock %}

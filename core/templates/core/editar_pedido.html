@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}Editar Pedido{% endblock %}
+{% block content %}
+<h1 class="mb-4">Editar Pedido</h1>
+<form method="POST" class="row g-3">
+    {% csrf_token %}
+    <div class="col-md-6">
+        <label for="nome_cliente" class="form-label">Nome do Cliente:</label>
+        <input type="text" id="nome_cliente" name="nome_cliente" value="{{ pedido.nome_cliente }}" class="form-control" required>
+    </div>
+    <div class="col-md-6">
+        <label for="telefone" class="form-label">Telefone:</label>
+        <input type="text" id="telefone" name="telefone" value="{{ pedido.telefone }}" class="form-control" required>
+    </div>
+    <div class="col-12">
+        <label for="endereco" class="form-label">Endereço:</label>
+        <textarea id="endereco" name="endereco" class="form-control" rows="3" required>{{ pedido.endereco }}</textarea>
+    </div>
+    <div class="col-md-6">
+        <label for="tipo" class="form-label">Tipo:</label>
+        <input type="text" id="tipo" name="tipo" value="{{ pedido.tipo }}" class="form-control" required>
+    </div>
+    <div class="col-md-3">
+        <label for="quantidade" class="form-label">Quantidade:</label>
+        <input type="number" id="quantidade" name="quantidade" value="{{ pedido.quantidade }}" step="1" min="1" class="form-control" required>
+    </div>
+    <div class="col-md-3">
+        <label for="valor_unitario" class="form-label">Valor Unitário:</label>
+        <input type="number" id="valor_unitario" name="valor_unitario" value="{{ pedido.valor_unitario }}" step="0.01" class="form-control" required>
+    </div>
+    <div class="col-12">
+        <label for="observacao" class="form-label">Observação:</label>
+        <textarea id="observacao" name="observacao" class="form-control" rows="3">{{ pedido.observacao }}</textarea>
+    </div>
+    <div class="col-md-6">
+        <label for="data_pedido" class="form-label">Data do Pedido:</label>
+        <input type="date" id="data_pedido" name="data_pedido" value="{{ pedido.data_pedido }}" class="form-control" required>
+    </div>
+    <div class="col-md-6">
+        <label for="data_entrega" class="form-label">Data de Entrega:</label>
+        <input type="date" id="data_entrega" name="data_entrega" value="{{ pedido.data_entrega }}" class="form-control" required>
+    </div>
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+    </div>
+</form>
+{% endblock %}

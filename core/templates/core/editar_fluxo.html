@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Editar Fluxo{% endblock %}
+{% block content %}
+<h1 class="mb-4">Editar Registro de Fluxo</h1>
+<form method="POST" class="row g-3">
+    {% csrf_token %}
+    <div class="col-md-6">
+        <label for="descricao" class="form-label">Descrição:</label>
+        <input type="text" id="descricao" name="descricao" value="{{ fluxo.descricao }}" class="form-control" required>
+    </div>
+    <div class="col-md-6">
+        <label for="tipo" class="form-label">Tipo:</label>
+        <select id="tipo" name="tipo" class="form-select" required>
+            <option value="entrada" {% if fluxo.tipo == "entrada" %}selected{% endif %}>Entrada</option>
+            <option value="saida" {% if fluxo.tipo == "saida" %}selected{% endif %}>Saída</option>
+        </select>
+    </div>
+    <div class="col-md-4">
+        <label for="valor" class="form-label">Valor:</label>
+        <input type="number" id="valor" name="valor" value="{{ fluxo.valor }}" class="form-control" step="0.01" required>
+    </div>
+    <div class="col-md-4">
+        <label for="parcelado" class="form-label">Parcelado:</label>
+        <input type="checkbox" id="parcelado" name="parcelado" {% if fluxo.parcelado %}checked{% endif %}>
+    </div>
+    <div class="col-md-4">
+        <label for="parcelas" class="form-label">Parcelas:</label>
+        <input type="number" id="parcelas" name="parcelas" value="{{ fluxo.parcelas }}" class="form-control" step="1" min="1">
+    </div>
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+        <a href="{% url 'listar_fluxo' %}" class="btn btn-secondary">Cancelar</a>
+    </div>
+</form>
+{% endblock %}

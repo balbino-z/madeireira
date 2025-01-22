@@ -1,0 +1,35 @@
+body {
+    background-color: #f8f9fa; /* Cor de fundo suave */
+    font-family: 'Arial', sans-serif;
+}
+
+.navbar {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.card {
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.table {
+    border-collapse: separate;
+    border-spacing: 0 8px;
+}
+
+.table th {
+    background-color: #0f161d;
+    color: white;
+}
+
+.table td {
+    background-color: white;
+    border: 1px solid #dee2e6;
+}
+
+.footer {
+    background-color: #f1f1f1;
+    padding: 15px 0;
+    font-size: 0.9rem;
+}
+

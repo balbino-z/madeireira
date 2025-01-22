@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<h1 class="text-center mb-4">Bem-vindo ao Dashboard</h1>
+
+<!-- Cartões Resumo -->
+<div class="row">
+    <div class="col-md-4">
+        <div class="card text-bg-primary mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Total de Pedidos</h5>
+                <p class="card-text fs-4">{{ total_pedidos }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-bg-danger mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Pedidos Atrasados</h5>
+                <p class="card-text fs-4">{{ pedidos_atrasados }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-bg-success mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Estoque Atual</h5>
+                <p class="card-text fs-4">{{ estoque_atual }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Gráficos -->
+<div class="row mt-5">
+    <div class="col-md-6">
+        <h4 class="text-center">Pedidos por Mês</h4>
+        <div id="pedidosPorMes" style="height: 400px;"></div>
+    </div>
+    <div class="col-md-6">
+        <h4 class="text-center">Lucros x Despesas</h4>
+        <div id="lucrosDespesas" style="height: 400px;"></div>
+    </div>
+</div>
+
+<!-- Navegação -->
+<div class="d-flex justify-content-center mt-5 gap-3">
+    <a href="{% url 'listar_pedidos' %}" class="btn btn-primary btn-lg">Ver Pedidos</a>
+    <a href="{% url 'listar_estoque' %}" class="btn btn-success btn-lg">Ver Estoque</a>
+    <a href="{% url 'listar_fluxo' %}" class="btn btn-warning btn-lg">Fluxo de Caixa</a>
+    <a href="{% url 'cadastrar_pedido' %}" class="btn btn-secondary btn-lg">Cadastrar Pedido</a>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Gráfico de Pedidos por Mês
+        const pedidosPorMesChart = echarts.init(document.getElementById('pedidosPorMes'));
+        pedidosPorMesChart.setOption({
+            title: { text: '' },
+            tooltip: {},
+            xAxis: { type: 'category', data: {{ meses|safe }} },
+            yAxis: { type: 'value' },
+            series: [{
+                name: 'Pedidos',
+                type: 'bar',
+                data: {{ pedidos_totais|safe }},
+                itemStyle: { color: 'rgba(54, 162, 235, 0.8)' }
+            }]
+        });
+
+        // Gráfico de Lucros x Despesas
+        const lucrosDespesasChart = echarts.init(document.getElementById('lucrosDespesas'));
+        lucrosDespesasChart.setOption({
+            title: { text: '' },
+            tooltip: { trigger: 'item' },
+            legend: { orient: 'vertical', left: 'left' },
+            series: [{
+                name: 'Valores',
+                type: 'pie',
+                radius: '50%',
+                data: [
+                    { value: {{ entradas }}, name: 'Entradas' },
+                    { value: {{ saidas }}, name: 'Saídas' }
+                ],
+                emphasis: {
+                    itemStyle: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }]
+        });
+    });
+</script>
+{% endblock %}

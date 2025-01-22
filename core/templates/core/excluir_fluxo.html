@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Excluir Fluxo{% endblock %}
+{% block content %}
+<h1 class="mb-4 text-danger">Excluir Registro de Fluxo</h1>
+<p>Tem certeza de que deseja excluir o registro de <strong>{{ fluxo.descricao }}</strong> no valor de R$ {{ fluxo.valor }}?</p>
+<form method="POST">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Confirmar Exclusão</button>
+    <a href="{% url 'listar_fluxo' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

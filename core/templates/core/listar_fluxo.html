@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block title %}Fluxo de Caixa{% endblock %}
+{% block content %}
+<h1 class="mb-4">Fluxo de Caixa</h1>
+
+<!-- Tabela de Fluxo de Caixa -->
+<table class="table table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>Descrição</th>
+            <th>Tipo</th>
+            <th>Valor</th>
+            <th>Parcelado</th>
+            <th>Parcelas</th>
+            <th>Data</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if gastos %}
+            {% for gasto in gastos %}
+            <tr>
+                <td>{{ gasto.descricao }}</td>
+                <td>
+                    {% if gasto.tipo == 'entrada' %}
+                        <span class="text-success">Entrada</span>
+                    {% else %}
+                        <span class="text-danger">Saída</span>
+                    {% endif %}
+                </td>
+                <td>R$ {{ gasto.valor }}</td>
+                <td>{{ gasto.parcelado|yesno:"Sim,Não" }}</td>
+                <td>{{ gasto.parcelas }}</td>
+                <td>{{ gasto.data }}</td>
+                <td>
+                    <a href="{% url 'editar_fluxo' gasto.id %}" class="btn btn-warning btn-sm">Editar</a>
+                    <a href="{% url 'excluir_fluxo' gasto.id %}" class="btn btn-danger btn-sm">Excluir</a>
+                </td>
+            </tr>
+            {% endfor %}
+        {% else %}
+        <tr>
+            <td colspan="7" class="text-center text-danger">Nenhum registro encontrado no fluxo de caixa.</td>
+        </tr>
+        {% endif %}
+    </tbody>
+</table>
+
+<!-- Botões de Ações -->
+<div class="d-flex justify-content-between mt-4">
+    <a href="{% url 'registrar_fluxo' %}" class="btn btn-primary">Registrar Entrada/Saída</a>
+    <a href="{% url 'calculo_financeiro' %}" class="btn btn-success">Ver Cálculo Financeiro</a>
+</div>
+{% endblock %}

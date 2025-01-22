@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}Cálculo Financeiro{% endblock %}
+{% block content %}
+<div class="container">
+    <h1 class="mb-4">Resumo Financeiro</h1>
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <th scope="row">Total de Custos (Saídas):</th>
+                        <td class="text-danger">R$ {{ total_custos }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Total de Receitas (Entradas):</th>
+                        <td class="text-success">R$ {{ total_receitas }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Total de Vendas:</th>
+                        <td class="text-primary">R$ {{ total_vendas }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Saldo Geral (Receitas - Custos):</th>
+                        <td class="{% if saldo >= 0 %}text-success{% else %}text-danger{% endif %}">
+                            R$ {{ saldo }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Lucro Líquido (Vendas - Custos):</th>
+                        <td class="{% if lucro_liquido >= 0 %}text-success{% else %}text-danger{% endif %}">
+                            R$ {{ lucro_liquido }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="text-center">
+        <a href="{% url 'listar_fluxo' %}" class="btn btn-secondary">Voltar ao Fluxo de Caixa</a>
+    </div>
+</div>
+{% endblock %}

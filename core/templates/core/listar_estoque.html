@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block title %}Estoque Atual{% endblock %}
+{% block content %}
+<h1 class="mb-4 text-center">Estoque Atual</h1>
+
+<!-- Informações do Estoque -->
+<div class="row mb-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Informações Gerais</h5>
+                <p><strong>Quantidade Disponível:</strong> {{ estoque.quantidade_disponivel }}</p>
+                <p><strong>Limite Crítico:</strong> {{ estoque.limite_critico }}</p>
+                {% if alerta %}
+                    <p class="text-danger fw-bold">{{ alerta }}</p>
+                {% else %}
+                    <p class="text-success fw-bold">Estoque dentro do limite seguro.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card bg-light">
+            <div class="card-body">
+                <h5 class="card-title">Última Atualização</h5>
+                <p><strong>Data:</strong> {{ estoque.ultima_atualizacao|date:"d/m/Y H:i" }}</p>
+                <p><strong>Responsável:</strong> {{ estoque.responsavel|default:"Marcela" }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Histórico de Alterações -->
+<div class="card mb-4">
+    <div class="card-body">
+        <h5 class="card-title">Histórico de Alterações</h5>
+        {% if historico %}
+            <table class="table table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Data</th>
+                        <th>Quantidade Alterada</th>
+                        <th>Responsável</th>
+                        <th>Observação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in historico %}
+                    <tr>
+                        <td>{{ item.data|date:"d/m/Y H:i" }}</td>
+                        <td>{{ item.quantidade_alterada }}</td>
+                        <td>{{ item.responsavel }}</td>
+                        <td>{{ item.observacao }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="text-center text-muted">Nenhum histórico de alterações disponível.</p>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Botão para Atualizar Estoque -->
+<div class="d-flex justify-content-center">
+    <a href="{% url 'atualizar_estoque' %}" class="btn btn-warning btn-lg">Atualizar Estoque</a>
+</div>
+{% endblock %}
