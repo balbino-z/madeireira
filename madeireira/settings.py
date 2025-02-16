@@ -99,10 +99,6 @@ DATABASES = {
         'OPTIONS': {
             'sslmode': 'require',  # Modo SSL
             'sslrootcert': os.path.join(BASE_DIR, 'prod-ca-2021.pem'),  # Certificado
-            'OPTIONS': {
-                'sslmode': 'verify-full',  # Verificação mais rigorosa
-                'sslrootcert': os.path.join(BASE_DIR, 'prod-ca-2021.pem'),
-            },
         },
     }
 }
