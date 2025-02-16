@@ -83,18 +83,26 @@ WSGI_APPLICATION = 'madeireira.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-import dj_database_url
+import os
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'madeireira',
-        'USER': 'madeireira_user',
-        'PASSWORD': 'ulwqAqwi0GnDvYE0EpPIZ5CYeMgdKNMy',
-        'HOST': 'dpg-cu8jkdpopnds73d6tgpg-a.oregon-postgres.render.com',
-        'PORT': '5432',
+        'NAME': 'madeireira',  # Nome do banco
+        'USER': 'madeireira_user',  # Usuário
+        'PASSWORD': 'ulwqAqwi0GnDvYE0EpPIZ5CYeMgdKNMy',  # Senha
+        'HOST': 'dpg-cu8jkdpopnds73d6tgpg-a.oregon-postgres.render.com',  # Hostname
+        'PORT': '5432',  # Porta
         'OPTIONS': {
-            'sslmode': 'require',
-            'sslrootcert': os.path.join(BASE_DIR, 'global-bundle.pem'),  # Caminho do certificado
+            'sslmode': 'require',  # Modo SSL
+            'sslrootcert': os.path.join(BASE_DIR, 'prod-ca-2021.pem'),  # Certificado
+            'OPTIONS': {
+                'sslmode': 'verify-full',  # Verificação mais rigorosa
+                'sslrootcert': os.path.join(BASE_DIR, 'prod-ca-2021.pem'),
+            },
         },
     }
 }
