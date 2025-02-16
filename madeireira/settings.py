@@ -10,6 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+import os
+import dj_database_url
+
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -20,12 +23,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-+g2qxp*hwo8p2bzf*7yzu0cs6d48ys2+c_^!l3+hcz9s2resjd'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'e_xdapa!&(!td#mjgqu!rykj$5v32f3_c!87y&_4os(s_5#i9o')  # Remova a chave hardcoded!
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['seuprojeto.onrender.com']
+ALLOWED_HOSTS = ['*']  # Temporário, depois ajuste para seu domínio
 
 
 # Redirecionamento após login
@@ -81,11 +84,13 @@ WSGI_APPLICATION = 'madeireira.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        default='postgres://madeireira_user:ulwqAqwi0GnDvYE0EpPIZ5CYeMgdKNMy@dpg-cu8jkdpopnds73d6tgpg-a.oregon-postgres.render.com/madeireira',
+        conn_max_age=600
+    )
 }
+
+
 
 
 # Password validation
@@ -118,13 +123,6 @@ TIME_ZONE = 'America/Sao_Paulo'  # Altera o fuso horário para São Paulo
 USE_I18N = True
 
 USE_TZ = True
-
-import dj_database_url
-
-DATABASES = {
-    'default': dj_database_url.config(default='sqlite:///db.sqlite3')
-}
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
