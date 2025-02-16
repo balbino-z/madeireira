@@ -95,7 +95,9 @@ DATABASES = {
 }
 
 
-
+CSRF_TRUSTED_ORIGINS = [
+    'https://madeireira.onrender.com',  # Sua URL do Render
+]
 
 
 # Password validation
@@ -140,7 +142,7 @@ STATICFILES_DIRS = [
     BASE_DIR / 'core/static',  # Arquivos estáticos específicos do app 'core'
 ]
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 # Diretório para arquivos coletados em produção
 STATIC_ROOT = BASE_DIR / 'staticfiles'
