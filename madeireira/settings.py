@@ -89,6 +89,7 @@ DATABASES = {
     'default': dj_database_url.config(
         default="postgresql://madeireira_db_user:xjEtVkrhU5I9Xe579OaxqBWEoGK5lXFp@dpg-cuolmdt2ng1s73eagcq0-a.oregon-postgres.render.com/madeireira_db",
         conn_max_age=600,
+        conn_health_checks=True,
         ssl_require=True
     )
 }
