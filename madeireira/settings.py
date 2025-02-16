@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', 'e_xdapa!&(!td#mjgqu!rykj$5v32f3_c!87y&_4os(s_5#i9o')  # Remova a chave hardcoded!
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']  # Temporário, depois ajuste para seu domínio
 
