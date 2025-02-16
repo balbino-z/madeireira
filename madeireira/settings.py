@@ -26,14 +26,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', 'e_xdapa!&(!td#mjgqu!rykj$5v32f3_c!87y&_4os(s_5#i9o')  # Remova a chave hardcoded!
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']  # Temporário, depois ajuste para seu domínio
 
 
 # Redirecionamento após login
 LOGIN_REDIRECT_URL = '/pedidos/'  # Página inicial após login
-LOGOUT_REDIRECT_URL = '/'  # Página inicial após logout
+LOGOUT_REDIRECT_URL = '/accounts/login/'
 
 
 # Application definition
@@ -125,7 +125,11 @@ AUTH_PASSWORD_VALIDATORS = [
 LANGUAGE_CODE = 'pt-br'  # Altera para Português-Brasil
 TIME_ZONE = 'America/Sao_Paulo'  # Altera o fuso horário para São Paulo
 
-
+# Configurações de Autenticação
+LOGIN_URL = '/accounts/login/'  # Adicione esta linha
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+]
 
 USE_I18N = True
 

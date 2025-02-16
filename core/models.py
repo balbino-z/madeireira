@@ -15,6 +15,8 @@ class Pedido(models.Model):
     observacao = models.TextField(blank=True, null=True)
     data_pedido = models.DateField(default=timezone.now)
     data_entrega = models.DateField(default=timezone.now)
+    class Meta:
+        ordering = ['-id']
 
     def calcular_valor_total(self):
         self.valor_total = self.quantidade * self.valor_unitario

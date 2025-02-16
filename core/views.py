@@ -15,7 +15,7 @@ from django.db.models.functions import TruncMonth
 
 @login_required
 def listar_pedidos(request):
-    pedidos = Pedido.objects.all()
+    pedidos = Pedido.objects.all().order_by('-id')  # Ordena por ID decrescente
     estoque_atual = Estoque.objects.aggregate(total=Sum('quantidade_disponivel'))['total'] or 0
 
     # Filtros (pesquisa e intervalo de datas)
