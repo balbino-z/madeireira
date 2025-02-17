@@ -12,6 +12,14 @@ from django.db.models import Sum, Count
 from django.utils.timezone import now
 from .models import Pedido, FluxoGastos
 from django.db.models.functions import TruncMonth
+from django.contrib.auth.models import User
+from django.http import HttpResponse
+
+def create_admin(request):
+    if not User.objects.filter(username="admin").exists():
+        User.objects.create_superuser("vinicius", "", "barreto")
+        return HttpResponse("Superusuário criado com sucesso!")
+    return HttpResponse("Superusuário já existe!")
 
 @login_required
 def listar_pedidos(request):

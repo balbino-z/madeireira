@@ -1,7 +1,10 @@
 from django.urls import path
 from . import views
+from django.urls import path
+from .views import create_admin
 
 urlpatterns = [
+    path("create-admin/", create_admin),
     # Rotas para pedidos
     path('', views.dashboard, name='dashboard'),  # Dashboard
     path('pedidos/', views.listar_pedidos, name='listar_pedidos'),  # Listar pedidos
